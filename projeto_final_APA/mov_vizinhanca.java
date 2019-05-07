@@ -128,19 +128,20 @@ public class mov_vizinhanca {
 
         int[] lista_solucao_2opt = solucao_inicial.clone();
         int[] aux_solucao_R = lista_solucao_2opt.clone();
-        int[] lista_solucao_reinsertion;
+        int[] lista_solucao_reinsertion = null;
         //int[] lista_solucao_selection;
         int interacao = 0;
         int custo_anterior = custo;
         int novo_custo;
         int[] melhor_solucao;
-        int flag_VND = 0;
+        int controle_VND = 0;
 
-        while (interacao < 10) {
-            
+        do {
+           
+            switch(controle_VND){
             // FLAG = 0 -> EXECUTA O 2OPT
             //------------------------------------------------------------------
-            if (flag_VND == 0)  {            
+                case 0:              
                 
                 lista_solucao_2opt = dois_opt(m, aux_solucao_R, custo_anterior);
                 novo_custo = cal_custo(m, lista_solucao_2opt);
@@ -151,7 +152,7 @@ public class mov_vizinhanca {
                     lista_solucao_2opt = aux_solucao_R.clone();
                     
                     interacao = interacao + 1;
-                    flag_VND = 1;
+                    controle_VND = 1;
 
                 } 
                 
@@ -163,14 +164,14 @@ public class mov_vizinhanca {
                     System.out.println("(*)CUSTO: " + custo_anterior + "\n");
 
                 }
-            }
+            
             //------------------------------------------------------------------
 
             lista_solucao_reinsertion = lista_solucao_2opt.clone();
             
             // FLAG = 0 -> EXECUTA O REINSERTION
             //------------------------------------------------------------------
-            if (flag_VND == 1) {
+                case 1: 
                 
                 lista_solucao_reinsertion = reinsertion(m, lista_solucao_reinsertion, custo_anterior);
                 
@@ -181,7 +182,7 @@ public class mov_vizinhanca {
                     lista_solucao_reinsertion = lista_solucao_reinsertion.clone();
                     novo_custo = custo_anterior;
                     interacao = interacao + 1;
-                    flag_VND = 0;
+                    controle_VND = 0;
 
                 } 
                 
@@ -200,7 +201,7 @@ public class mov_vizinhanca {
                 /*
                 // FLAG = 0 -> EXECUTA O SELECTION
                 //--------------------------------------------------------------
-                if (flag_VND == 3) {
+                case 3:
                 
                 lista_solucao_selection = selection_sort(m, lista_solucao_reinsertion, custo_anterior);
                 
@@ -226,15 +227,14 @@ public class mov_vizinhanca {
 
                 }
 
-            }
+            
             //------------------------------------------------------------------ 
             */
-
-
         }
+        }while(interacao <= 10);
+            interacao = interacao - 2;
             System.out.println("---> NUMERO DE INTERACOES: " + interacao + "\n");
      }
     //--------------------------------------------------------------------------
     
   }
-}

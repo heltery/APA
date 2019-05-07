@@ -12,7 +12,7 @@ import java.util.ArrayList;
 public class arquivo {
         String guardar = null;
         String linha = null;
-        String[] brokeString = new String[2];
+        String[] string_quebra = new String[2];
         
         // ARMAZENANDO OS VALORES DE VERTICE E COORDENADAS X E Y
         //----------------------------------------------------------------------
@@ -27,11 +27,11 @@ public class arquivo {
 
             while ((linha = hy.readLine()) != null) {
                 linha = linha.trim(); //TRATANDO O ESPAÇO INICIAL
-                brokeString = linha.split("   "); //TRATANDO OS 3 ESPAÇOS OBSERVADOS ENTRE AS COORDENADAS
+                string_quebra = linha.split("   "); //TRATANDO OS 3 ESPAÇOS OBSERVADOS ENTRE AS COORDENADAS
 
                 int h = 0;
 
-                for (String element : brokeString) {
+                for (String element : string_quebra) {
                     switch (h) {
                         case 0:
                             v.add(Integer.parseInt(element));

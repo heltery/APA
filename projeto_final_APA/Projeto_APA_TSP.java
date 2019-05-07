@@ -59,6 +59,10 @@ public class Projeto_APA_TSP {
     //--------------------------------------------------------------------------
 
     public static void main(String[] args) throws FileNotFoundException {
+        
+        int[][] recebe_matriz;
+        int[] solucaoKNN;
+        int custoKNN;
 
         // APRESENTAÇÃO DO TRABALHO + SOLICITAÇÃO DO NOME DO ARQUIVO
         //----------------------------------------------------------------------
@@ -75,15 +79,15 @@ public class Projeto_APA_TSP {
                 + "PROJETO FINAL - CAIXEIRO VIAJANTE (TSP)"
                 + "\n");
         
-        String percurso = JOptionPane.showInputDialog(" ---> Digite a instância: ");
-        System.out.println(percurso);
+        String percurso = JOptionPane.showInputDialog(" ---> DIGITE O NOME DO ARQUIVO: ");
+        //System.out.println(percurso);
         BufferedReader br = new BufferedReader(new FileReader(percurso));
         //----------------------------------------------------------------------
 
         arquivo arq = new arquivo();
         matriz matriz_adjacencia = new matriz();
         knn solucao_inicial_knn = new knn();
-        //mov_vizinhanca mov_reinsertion = new mov_vizinhanca();
+        mov_vizinhanca mov_reinsertion = new mov_vizinhanca();
         mov_vizinhanca mov = new mov_vizinhanca();
 
         arq.ler_arquivo(percurso);
@@ -91,9 +95,9 @@ public class Projeto_APA_TSP {
         ArrayList<Float> y = arq.y;
         ArrayList<Integer> v = arq.v;
 
-        int[][] recebe_matriz = matriz_adjacencia.matriz_adj(v, x, y);
-        int[] solucaoKNN = solucao_inicial_knn.solucao_vizinho_proximo(recebe_matriz, 0);
-        int custoKNN = cal_custo(recebe_matriz, solucaoKNN);
+        recebe_matriz = matriz_adjacencia.matriz_adj(v, x, y);
+        solucaoKNN = solucao_inicial_knn.solucao_vizinho_proximo(recebe_matriz, 0);
+        custoKNN = cal_custo(recebe_matriz, solucaoKNN);
 
         
         System.out.println("--------------------------------------"); 
@@ -106,8 +110,7 @@ public class Projeto_APA_TSP {
         //----------------------------------------------------------------------
         mov.vnd(custoKNN, recebe_matriz, solucaoKNN);
         //---------------------------------------------------------------------- 
-         
-        
+                
         
         /*
         // TESTANDO APENAS O 2 OPT
