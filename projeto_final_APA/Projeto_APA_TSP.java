@@ -84,16 +84,16 @@ public class Projeto_APA_TSP {
         matriz matriz_adjacencia = new matriz();
         knn solucao_inicial_knn = new knn();
         //mov_vizinhanca mov_reinsertion = new mov_vizinhanca();
-        mov_vizinhanca mov_VND = new mov_vizinhanca();
+        mov_vizinhanca mov = new mov_vizinhanca();
 
         arq.ler_arquivo(percurso);
         ArrayList<Float> x = arq.x;
         ArrayList<Float> y = arq.y;
         ArrayList<Integer> v = arq.v;
 
-        int[][] recebeMatriz = matriz_adjacencia.matriz_adj(v, x, y);
-        int[] solucaoKNN = solucao_inicial_knn.solucao_vizinho_proximo(recebeMatriz, 0);
-        int custoKNN = cal_custo(recebeMatriz, solucaoKNN);
+        int[][] recebe_matriz = matriz_adjacencia.matriz_adj(v, x, y);
+        int[] solucaoKNN = solucao_inicial_knn.solucao_vizinho_proximo(recebe_matriz, 0);
+        int custoKNN = cal_custo(recebe_matriz, solucaoKNN);
 
         
         System.out.println("--------------------------------------"); 
@@ -101,7 +101,61 @@ public class Projeto_APA_TSP {
         System.out.println("CUSTO: " + custoKNN);
         System.out.println("--------------------------------------"); 
 
-         mov_VND.vnd(custoKNN, recebeMatriz, solucaoKNN);
+        
+        // CHAMANDO O VND
+        //----------------------------------------------------------------------
+        mov.vnd(custoKNN, recebe_matriz, solucaoKNN);
+        //---------------------------------------------------------------------- 
+         
+        
+        
+        /*
+        // TESTANDO APENAS O 2 OPT
+        //----------------------------------------------------------------------
+        int[] solucao_teste = solucaoKNN.clone();
+        int[] aux_solucao = solucao_teste.clone();
+        int novo_custo;
+        
+        solucao_teste = mov.dois_opt(recebe_matriz, aux_solucao, custoKNN);
+        novo_custo = cal_custo(recebe_matriz, solucao_teste);
+        
+        System.out.println("(-------------------------------------");
+        System.out.println("(*)MELHOR COM 2-OPT: " + imprimir_solucao(solucao_teste) + "0");
+        System.out.println("(*)CUSTO: " + novo_custo + "\n");
+        //----------------------------------------------------------------------
+        */
+        
+        /*
+        // TESTANDO APENAS O SELECTION SORT
+        //----------------------------------------------------------------------
+        int[] solucao_teste = solucaoKNN.clone();
+        int[] aux_solucao = solucao_teste.clone();
+        int novo_custo;
+        
+        solucao_teste = mov.selection_sort(recebe_matriz, aux_solucao, custoKNN);
+        novo_custo = cal_custo(recebe_matriz, solucao_teste);
+        
+        System.out.println("(-------------------------------------");
+        System.out.println("(*)MELHOR COM SELECTION SORT: " + imprimir_solucao(solucao_teste) + "0");
+        System.out.println("(*)CUSTO: " + novo_custo + "\n");
+        //----------------------------------------------------------------------
+        */
 
+        /*
+        // TESTANDO APENAS O REINSERTION
+        //----------------------------------------------------------------------
+        int[] solucao_teste = solucaoKNN.clone();
+        int[] aux_solucao = solucao_teste.clone();
+        int novo_custo;
+        
+        solucao_teste = mov.reinsertion(recebe_matriz, aux_solucao, custoKNN);
+        novo_custo = cal_custo(recebe_matriz, solucao_teste);
+        
+        System.out.println("(-------------------------------------");
+        System.out.println("(*)MELHOR COM REINSERTION: " + imprimir_solucao(solucao_teste) + "0");
+        System.out.println("(*)CUSTO: " + novo_custo + "\n");
+        //----------------------------------------------------------------------
+        */
+        
     }
 }
