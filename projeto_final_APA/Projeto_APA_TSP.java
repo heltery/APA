@@ -80,11 +80,11 @@ public class Projeto_APA_TSP {
                 + "\n");
         
         String percurso = JOptionPane.showInputDialog(" ---> DIGITE O NOME DO ARQUIVO: ");
-        //System.out.println(percurso);
-        BufferedReader br = new BufferedReader(new FileReader(percurso));
+        
         //----------------------------------------------------------------------
 
-        arquivo arq = new arquivo();
+        BufferedReader br = new BufferedReader(new FileReader(percurso));
+        arquivo_tspCUP arq = new arquivo_tspCUP();
         matriz matriz_adjacencia = new matriz();
         knn solucao_inicial_knn = new knn();
         mov_vizinhanca mov_reinsertion = new mov_vizinhanca();
