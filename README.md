@@ -1,2 +1,2 @@
 # APA
-Implementação dos códigos da disciplina de APA da UFPB
+Periodo: 2018.2 || Professor: Bruno || UFPB
